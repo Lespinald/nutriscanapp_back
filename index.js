@@ -39,5 +39,39 @@ app.get('/ping', async (req, res) => {
   }
 });
 
+app.get('/crear-tabla', async (req, res) => {
+  try {
+    // Ejecuta una consulta para crear la tabla 'prueba'
+    await pool.query('CREATE TABLE prueba (id SERIAL PRIMARY KEY, usuario VARCHAR)');
+    return res.json({ success: true, message: 'Tabla creada correctamente' });
+  } catch (error) {
+    console.error('Error al crear la tabla:', error);
+    return res.status(500).json({ success: false, message: 'Error al crear la tabla' });
+  }
+});
+
+// Ruta para agregar un elemento a la tabla 'prueba'
+app.get('/agregar-elemento', async (req, res) => {
+  try {
+    // Ejecuta una consulta para agregar un elemento a la tabla 'prueba'
+    await pool.query("INSERT INTO prueba (usuario) VALUES ('Juan Prueba1')");
+    return res.json({ success: true, message: 'Elemento agregado correctamente' });
+  } catch (error) {
+    console.error('Error al agregar elemento:', error);
+    return res.status(500).json({ success: false, message: 'Error al agregar elemento' });
+  }
+});
+
+app.get('/consultar-elemento', async (req, res) => {
+  try {
+    // Ejecuta una consulta para agregar un elemento a la tabla 'prueba'
+    const resp = await pool.query("SELECT * FROM prueba");
+    return res.json({ success: true, message: resp });
+  } catch (error) {
+    console.error('Error al agregar elemento:', error);
+    return res.status(500).json({ success: false, message: 'Error al consultar elemento' });
+  }
+});
+
 app.listen(5432)
 console.log("server port ", 5432)
