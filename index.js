@@ -26,10 +26,18 @@ app.get('/bing', async (req,res) => {
   return res.json(pool)
 })
 
-app.get('/ping', async (req,res) => {
-  const result = await pool.query('SELECT NOW()')
-  return res.json(result)
-})
+app.get('/ping', async (req, res) => {
+  try {
+    // Intenta ejecutar la consulta 'SELECT NOW()' en la base de datos
+    const result = await pool.query('SELECT NOW()');
+    // Si la consulta se ejecuta correctamente, envía una respuesta con un mensaje de éxito
+    return res.json({ connected: true, message: 'Conexión exitosa con la base de datos' });
+  } catch (error) {
+    // Si se produce un error al ejecutar la consulta, envía una respuesta con un mensaje de error
+    console.error('Error al ejecutar la consulta:', error);
+    return res.status(500).json({ connected: false, message: 'Error al conectar con la base de datos' });
+  }
+});
 
 app.listen(5432)
 console.log("server port ", 5432)
