@@ -31,7 +31,7 @@ app.get('/ping', async (req, res) => {
     // Intenta ejecutar la consulta 'SELECT NOW()' en la base de datos
     const result = await pool.query('SELECT NOW()');
     // Si la consulta se ejecuta correctamente, envía una respuesta con un mensaje de éxito
-    return res.json({ connected: true, message: 'Conexión exitosa con la base de datos' });
+    return res.json({ connected: true, message: result });
   } catch (error) {
     // Si se produce un error al ejecutar la consulta, envía una respuesta con un mensaje de error
     console.error('Error al ejecutar la consulta:', error);
