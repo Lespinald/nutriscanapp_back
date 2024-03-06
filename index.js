@@ -1,8 +1,7 @@
 import express from "express";
 import pg from 'pg'
 import { config } from 'dotenv'
-
-const pool = require('./config')
+import { pool } from './config'
 
 const app = express()
 
