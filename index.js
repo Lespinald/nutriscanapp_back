@@ -1,5 +1,6 @@
 import express from "express";
 import pg from 'pg'
+const { Pool } = require('pg');
 import { config } from 'dotenv'
 
 const app = express()
@@ -11,6 +12,7 @@ const pool = new Pool({
     password: 'D85SsQNsI74qwGGrKNsk70UVstWa5c6I',
     port: 5432, // Your database port
   });
+
 app.get('/', (req,res) => {
     res.send('Hello world')
 })
