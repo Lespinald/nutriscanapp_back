@@ -11,7 +11,7 @@ const pool = new Pool({
   user: 'nutriscan_db_user',
   host: 'nutriscanapp-back.onrender.com',
   database: 'nutriscan_db',
-  password: 'tu_contraseña_de_la_base_de_datos',
+  password: 'D85SsQNsI74qwGGrKNsk70UVstWa5c6I',
   port: 5432,
   ssl: true // Asegúrate de que esto esté configurado correctamente si Render requiere SSL
 });
