@@ -1,4 +1,10 @@
-import { Pool } from "pg";
+import express from "express";
+import pg from 'pg'
+import { config } from 'dotenv'
+
+import pkg from 'pg';
+const { Pool } = pkg;
+
 
 // Configura la conexión a la base de datos en Render
 const pool = new Pool({
@@ -10,14 +16,16 @@ const pool = new Pool({
   ssl: true // Asegúrate de que esto esté configurado correctamente si Render requiere SSL
 });
 
-// Realiza la consulta 'SELECT NOW()'
-pool.query('SELECT NOW()', (error, result) => {
-  if (error) {
-    console.error('Error al ejecutar la consulta:', error);
-  } else {
-    console.log('Resultado de la consulta:', result.rows);
-  }
-  
-  // Cierra la conexión con la base de datos
-  pool.end();
-});
+const app = express()
+
+app.get('/', (req,res) => {
+    res.send('Hello world')
+})
+
+app.get('/ping', async (req,res) => {
+    const result = await pool.query('SELECT NOW()')
+    return res.json(result.rows[0])
+})
+
+app.listen(5432)
+console.log("server port ", 5432)
