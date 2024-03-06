@@ -19,12 +19,16 @@ const pool = new Pool({
 const app = express()
 
 app.get('/', (req,res) => {
-    res.send('Hello world')
+  res.send('Hello world')
+})
+
+app.get('/bing', async (req,res) => {   
+  return res.json(pool)
 })
 
 app.get('/ping', async (req,res) => {
-    const result = await pool.query('SELECT NOW()')
-    return res.json(result.rows[0])
+  const result = await pool.query('SELECT NOW()')
+  return res.json(result)
 })
 
 app.listen(5432)
