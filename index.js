@@ -9,7 +9,7 @@ const { Pool } = pkg;
 // Configura la conexión a la base de datos en Render
 const pool = new Pool({
   user: 'nutriscan_db_user',
-  host: 'nutriscanapp-back.onrender.com',
+  host: 'postgres://nutriscan_db_user:D85SsQNsI74qwGGrKNsk70UVstWa5c6I@dpg-cnjrlgocmk4c739ik8v0-a/nutriscan_db',
   database: 'nutriscan_db',
   password: 'D85SsQNsI74qwGGrKNsk70UVstWa5c6I',
   port: 5432,
