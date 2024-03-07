@@ -19,7 +19,7 @@ const pool = new Pool({
 const app = express()
 
 app.get('/', (req,res) => {
-  res.send('Hello world')
+  res.send('Hola somos NutriScan')
 })
 
 app.get('/bing', async (req,res) => {   
@@ -31,7 +31,7 @@ app.get('/ping', async (req, res) => {
     // Intenta ejecutar la consulta 'SELECT NOW()' en la base de datos
     const result = await pool.query('SELECT NOW()');
     // Si la consulta se ejecuta correctamente, envía una respuesta con un mensaje de éxito
-    return res.json({ connected: true, message: result });
+    return res.json({ connected: true, message: result.rows[0] });
   } catch (error) {
     // Si se produce un error al ejecutar la consulta, envía una respuesta con un mensaje de error
     console.error('Error al ejecutar la consulta:', error);
@@ -66,7 +66,7 @@ app.get('/consultar-elemento', async (req, res) => {
   try {
     // Ejecuta una consulta para agregar un elemento a la tabla 'prueba'
     const resp = await pool.query("SELECT * FROM prueba");
-    return res.json({ success: true, message: resp });
+    return res.json({ success: true, message: resp.rows });
   } catch (error) {
     console.error('Error al agregar elemento:', error);
     return res.status(500).json({ success: false, message: 'Error al consultar elemento' });
